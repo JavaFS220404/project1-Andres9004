@@ -15,7 +15,12 @@ package com.revature.models;
  */
 public class Reimbursement extends AbstractReimbursement {
 
-    public Reimbursement() {
+	private String description; 
+    private String creationdate;
+    private String resolutiondate;
+    //receiptimage
+    
+	public Reimbursement() {
         super();
     }
 
@@ -26,4 +31,35 @@ public class Reimbursement extends AbstractReimbursement {
     public Reimbursement(int id, Status status, User author, User resolver, double amount) {
         super(id, status, author, resolver, amount);
     }
+    //mycode
+    public Reimbursement(int id, Status status, User author, User resolver, double amount,
+    		String description, String creationdate, String resolutiondate) {
+        super(id, status, author, resolver, amount);
+        this.description = description;
+        this.creationdate = creationdate;
+        this.resolutiondate = resolutiondate;
+    }
+    
+    public String getDescription() {
+        return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    public String getCreationDate() {
+        return creationdate;
+    }
+    public void setCreationDate(String creationdate) {
+        this.creationdate = creationdate;
+    }
+    public String getResolutionDate() {
+        return resolutiondate;
+    }
+    public void setResolutionDate(String resolutiondate) {
+        this.resolutiondate = resolutiondate;
+    }
+    
+    
+    
 }
