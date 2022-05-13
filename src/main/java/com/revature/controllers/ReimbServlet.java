@@ -152,23 +152,22 @@ public class ReimbServlet extends HttpServlet{
 				Reimbursement newTicket= objectMapper.readValue(body,  Reimbursement.class);
 				Reimbursement ticketToUpdate = reimbService.getReimbursementByID(newTicket.getId()).get();
 				
+				Reimbursement processedTicket = ticketToUpdate;
 				statusSwitch:
 				switch(newStatus) {
 				case 1:
-					ticketToUpdate.setStatus(Status.APPROVED);
+					processedTicket = reimbService.process(ticketToUpdate, Status.APPROVED, user);
 					break statusSwitch;
 				case 2:
-					ticketToUpdate.setStatus(Status.DENIED);
+					processedTicket = reimbService.process(ticketToUpdate, Status.DENIED, user);
 					break statusSwitch;
 				}
 				
+				Reimbursement updatedTicket = reimbService.update(processedTicket);
 				
-				ticketToUpdate.setResolver(user);
-				Timestamp instant = Timestamp.from(Instant.now());
-				ticketToUpdate.setResolutionDate(instant);
-				System.out.println(ticketToUpdate);
+				System.out.println(updatedTicket);
 				
-				if(reimbService.update(ticketToUpdate)!=null) {
+				if(reimbService.update(updatedTicket)!=null) {
 					resp.setStatus(201);
 				}else {
 					resp.setStatus(406);
