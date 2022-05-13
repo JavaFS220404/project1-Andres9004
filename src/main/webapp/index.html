@@ -6,6 +6,7 @@
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <meta charset="UTF-8">
   <title>ERS Login Page</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -130,6 +131,11 @@
 
     <div id="userTicketsTable" style="display:none">
       <br><br>
+      <div style="width:80%; text-align: left; margin:auto">
+        <p>Filter table:</p>
+        <input class="form-control" id="uTicketStatusFilter" type="text" placeholder="e.g. PENDING">
+      </div>
+      <br>
       <table class="table table-striped" style="width:80%; text-align: center; margin:auto">
         <thead>
           <tr>
@@ -137,7 +143,7 @@
             <th scope="col">Status</th>
             <th scope="col">Author</th>
             <th scope="col">Resolver</th>
-            <th scope="col">Amount</th>
+            <th scope="col">Amount (€)</th>
             <th scope="col">Type</th>
             <th scope="col">Description</th>
             <th scope="col">Creation Date</th>
@@ -218,6 +224,11 @@
     </nav>
 
     <div id="usersTable" style="display:none">
+      <div style="width:90%; text-align: left; margin:auto">
+        <p>Filter table:</p>
+        <input class="form-control" id="usersTableFilter" type="text" placeholder="e.g. first name">
+      </div>
+      <br>
       <table class="table table-striped" style="width:90%; text-align: center; margin:auto">
         <thead>
           <tr>
@@ -240,6 +251,12 @@
 
     <div id="managerTicketsTable" style="display:none">
       <br><br>
+      <div style="width:80%; text-align: left; margin:auto">
+        <p>Filter table:</p>
+        <input class="form-control" id="mTicketStatusFilter" type="text" placeholder="e.g. PENDING">
+      </div>
+      <br>
+
       <table class="table table-striped" style="width:80%; text-align: center; margin:auto">
         <thead>
           <tr>
@@ -247,7 +264,7 @@
             <th scope="col">Status</th>
             <th scope="col">Author</th>
             <th scope="col">Resolver</th>
-            <th scope="col">Amount</th>
+            <th scope="col">Amount (€)</th>
             <th scope="col">Type</th>
             <th scope="col">Description</th>
             <th scope="col">Creation Date</th>
@@ -255,7 +272,7 @@
             <th scope="col">Receipt Image</th>
           </tr>
         </thead>
-        <tbody id="managerTicktTableBody">
+        <tbody id="managerTicketTableBody">
         </tbody>
       </table>
       <br><br>
@@ -292,6 +309,39 @@
 
 
   <script src="index.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#mTicketStatusFilter").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#managerTicketTableBody tr").filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+  </script>
+
+  <script>
+    $(document).ready(function () {
+      $("#uTicketStatusFilter").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#reimbBody tr").filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function () {
+      $("#usersTableFilter").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#userBody tr").filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+  </script>
+
+
 </body>
 
 </html>

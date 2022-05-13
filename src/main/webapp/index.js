@@ -290,7 +290,7 @@ function populateTickets(reimbs) {
 }
 
 function populateAllTickets(reimbs) {
-  let tbody = document.getElementById("managerTicktTableBody");
+  let tbody = document.getElementById("managerTicketTableBody");
   tbody.innerHTML = "";
   for (let reimb of reimbs) {
     let row = document.createElement('tr');
