@@ -10,6 +10,8 @@ import java.util.Optional;
 import com.revature.exceptions.NewUserHasNonZeroIdException;
 import com.revature.exceptions.RegistrationUnsuccessfulException;
 import com.revature.repositories.UserDAO;
+import com.revature.repositories.UserDAOImpl;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,6 +32,7 @@ public class UserServiceTest {
     public static void setUpBeforeClass() throws Exception {
         userService = new UserService();
         userDAO = mock(UserDAO.class);
+        userService.userDAO=userDAO;
     }
 
     @Before

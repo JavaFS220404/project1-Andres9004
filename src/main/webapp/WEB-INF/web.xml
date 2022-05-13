@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>HelloServlets</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  
+   <servlet>
+  	<description></description> <!--  optional -->
+  	<display-name>LoginServlet</display-name>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<servlet-class>com.revature.controllers.LoginServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<description></description> <!--  optional -->
+  	<display-name>LogoutServlet</display-name>
+  	<servlet-name>LogoutServlet</servlet-name>
+  	<servlet-class>com.revature.controllers.LogoutServlet</servlet-class>
+    <init-param>
+  		<param-name>base_url</param-name>
+  		<param-value>http://localhost:8080/ers</param-value>
+  	</init-param>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>LogoutServlet</servlet-name>
+  	<url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+  	<description></description> <!--  optional -->
+  	<display-name>UserServlet</display-name>
+  	<servlet-name>UserServlet</servlet-name>
+  	<servlet-class>com.revature.controllers.UserServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>UserServlet</servlet-name>
+  	<url-pattern>/users/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<description></description> <!--  optional -->
+  	<display-name>ReimbServlet</display-name>
+  	<servlet-name>ReimbServlet</servlet-name>
+  	<servlet-class>com.revature.controllers.ReimbServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>ReimbServlet</servlet-name>
+  	<url-pattern>/reimb/*</url-pattern>
+  </servlet-mapping>
+
+  
+</web-app>

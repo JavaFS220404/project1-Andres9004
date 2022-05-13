@@ -18,19 +18,19 @@ public enum Status {
     PENDING {
         @Override
         public String toString() {
-            return "Pending";
+            return "PENDING";
         }
     },
     APPROVED {
         @Override
         public String toString() {
-            return "Approved";
+            return "APPROVED";
         }
     },
     DENIED {
         @Override
         public String toString() {
-            return "Denied";
+            return "DENIED";
         }
     }
 }

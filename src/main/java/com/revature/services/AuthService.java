@@ -1,7 +1,10 @@
 package com.revature.services;
 
+import com.revature.exceptions.NewUserHasNonZeroIdException;
+import com.revature.exceptions.UsernameNotUniqueException;
 import com.revature.models.User;
 
+import java.sql.SQLException;
 import java.util.Optional;
 
 /**
@@ -18,6 +21,9 @@ import java.util.Optional;
  */
 public class AuthService {
 
+	protected UserService userService = new UserService();
+	
+	
     /**
      * <ul>
      *     <li>Needs to check for existing users with username/email provided.</li>
@@ -28,9 +34,18 @@ public class AuthService {
      * </ul>
      */
     public User login(String username, String password) {
-        return null;
+    	Optional<User> user = userService.getByUsername(username);
+    	if(user.isPresent()) {
+    		if(user.get().getPassword().equals(password)) {
+    			return user.get();
+    		}else throw new UsernameNotUniqueException("The provided password is incorrect");
+    	}else throw new UsernameNotUniqueException("The provided username is not in the database");
     }
 
+    
+    
+    
+    
     /**
      * <ul>
      *     <li>Should ensure that the username/email provided is unique.</li>
@@ -45,8 +60,25 @@ public class AuthService {
      * After registration, the id will be a positive integer.
      */
     public User register(User userToBeRegistered) {
-        return null;
+    	try {
+	    	if(userToBeRegistered.getId()!=0) {
+				throw new NewUserHasNonZeroIdException();
+			}else if(userService.getByUsername(userToBeRegistered.getUsername()).isPresent()){
+				throw new UsernameNotUniqueException();
+			}else {
+	        return userService.create(userToBeRegistered);
+			}
+		}catch(NewUserHasNonZeroIdException e) {
+			e.printStackTrace();
+		}catch(UsernameNotUniqueException e) {
+			e.printStackTrace();
+		}
+    	return null;
     }
+    
+    
+    
+    
 
     /**
      * This is an example method signature for retrieving the currently logged-in user.

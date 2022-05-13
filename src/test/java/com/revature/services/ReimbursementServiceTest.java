@@ -16,6 +16,7 @@ import com.revature.models.Role;
 import com.revature.models.Status;
 import com.revature.models.User;
 import com.revature.repositories.ReimbursementDAO;
+import com.revature.repositories.ReimbursementDAOImpl;
 
 public class ReimbursementServiceTest {
 
@@ -32,7 +33,8 @@ public class ReimbursementServiceTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		reimbursementService = new ReimbursementService();
-		reimbursementDAO = mock(ReimbursementDAO.class);
+		reimbursementDAO = mock(ReimbursementDAOImpl.class);
+		reimbursementService.reimbDAO = reimbursementDAO;
 	}
 	
 	@Before

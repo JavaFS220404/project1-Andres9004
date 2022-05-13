@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <title>ERS Login Page</title>
+</head>
+
+<body>
+
+  <div id="loginMenu" style="display:block">
+    <br><br><br>
+    <h2 style="text-align: center; margin:auto">Welcome to the Employee Reimbursement System</h2>
+    <br><br>
+    <div style="display:block" id="userLoginForm">
+      <h4 style="text-align: center; margin:auto">Please Login</h4>
+      <br>
+
+      <form class="row gx-3 gy-2 align-items-center" style="width: 25%; margin:auto">
+
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">@</span>
+          <input type="text" class="form-control" placeholder="Enter your username" aria-label="username"
+            aria-describedby="username" id="username">
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" placeholder="Enter your password" id="password">
+        </div>
+
+        <div class="input-group mb-3">
+          <label class="input-group-text" for="thisUserRole">Choose Role:</label>
+          <select class="form-select" name="thisUserRole" id="thisUserRole">
+            <option selected>Choose...</option>
+            <option value="1">EMPLOYEE</option>
+            <option value="2">FINANCE MANAGER</option>
+          </select>
+        </div>
+
+        <div class="col-auto">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="autoSizingCheck2">
+            <label class="form-check-label" for="autoSizingCheck2">Remember me</label>
+          </div>
+        </div>
+        <br><br><br>
+      </form>
+      <div style="width: 25%; text-align: center; margin:auto">
+        <button id="loginBtn" type="submit" class="btn btn-primary">Login</button>
+      </div>
+    </div>
+
+    <br>
+    <h6 style="text-align: center; margin:auto">or</h6>
+    <br>
+
+    <div style="width: 25%; text-align: center; margin:auto">
+      <button type="button" class="btn btn-dark" onclick="registerNewUser()">Register as a new user</button>
+    </div>
+
+    <div id="createUser" style="display:none; width: 33%; text-align: left; margin:auto">
+      <br>
+      <form class="row g-3">
+
+        <div class="input-group mb-3">
+          <label for="newUsername" class="col-sm-5 col-form-label">Choose a username*</label>
+          <input type="text" class="form-control" placeholder="@Username" id="newUsername">
+        </div>
+
+        <div class="input-group mb-3">
+          <label for="newPassword" class="col-sm-5 col-form-label">Choose a password*</label>
+          <input type="password" class="form-control" placeholder="Enter password" id="newPassword">
+        </div>
+
+        <div class="input-group mb-3">
+          <label for="newFirstName" class="col-sm-3 col-form-label">First Name:</label>
+          <input type="text" class="form-control" id="newFirstName">
+        </div>
+
+        <div class="input-group mb-3">
+          <label for="newLastName" class="col-sm-3 col-form-label">Last Name:</label>
+          <input type="text" class="form-control" id="newLastName">
+        </div>
+
+        <div class="input-group mb-3">
+          <label for="newEmail" class="col-sm-3 col-form-label">Email:</label>
+          <input type="text" class="form-control" id="newEmail">
+        </div>
+
+        <div class="input-group">
+          <label for="newPhone" class="col-sm-3 col-form-label">Phone number:</label>
+          <input type="tel" class="form-control" id="newPhone">
+        </div>
+
+        <div class="input-group mb-3">
+          <label for="newAddress" class="col-sm-3 col-form-label">Address:</label>
+          <input type="text" class="form-control" id="newAddress">
+        </div>
+      </form>
+      <div class="col-12" style="text-align:center; margin:auto">
+        <button onclick="addUser()" class="btn btn-primary">Create new user</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="userMenu" style="display:none">
+
+    <nav class="navbar navbar-expand-lg navbar-inverse navbar-dark bg-dark">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">ERS Users Home Page</a>
+        </div>
+        <ul class="navbar-nav navbar-left">
+          <li class="nav-item active">
+            <a class="nav-link" href="#" onclick="showUserTickets()">View tickets</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#" onclick="showNewTicketForm()">Create new ticket</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" onclick="UserLogout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
+        </div>
+    </nav>
+
+    <div id="userTicketsTable" style="display:none">
+      <br><br>
+      <table class="table table-striped" style="width:80%; text-align: center; margin:auto">
+        <thead>
+          <tr>
+            <th scope="col" style="width:5%">ID</th>
+            <th scope="col">Status</th>
+            <th scope="col">Author</th>
+            <th scope="col">Resolver</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Type</th>
+            <th scope="col">Description</th>
+            <th scope="col">Creation Date</th>
+            <th scope="col">Resolution Date</th>
+            <th scope="col">Receipt Image</th>
+          </tr>
+        </thead>
+        <tbody id="reimbBody">
+        </tbody>
+      </table>
+      <br><br>
+    </div>
+    <br><br>
+
+
+    <div id="createTicket" style="display:none; width: 35%; text-align: center; margin:auto">
+      <br>
+      <h4 style="text-align: center; margin:auto">New Ticket Creation</h4><br><br>
+      <form class="row g-3">
+
+        <div class="input-group mb-3">
+          <label class="input-group-text" for="ticketType">Select ticket type</label>
+          <select class="form-select" name = "ticketType" id="ticketType">
+            <option selected>Choose...</option>
+            <option value="1">LODGING</option>
+            <option value="2">TRAVEL</option>
+            <option value="3">FOOD</option>
+            <option value="4">OTHER</option>
+          </select>
+        </div>
+
+        <div class="input-group mb-3">
+          <label for="inputAmount" class="col-sm-8 col-form-label">Enter reimbursement amount (EUR)</label>
+          <div class="input-group-prepend">
+            <span class="input-group-text">€</span>
+          </div>
+          <input type="number" class="form-control" name="inputAmount" id="inputAmount">
+          <div class="input-group-append">
+            <span class="input-group-text">,00</span>
+          </div>
+        </div>
+
+
+        <div class="mb-3">
+          <label for="ticketDescription" class="form-label">Enter ticket description</label>
+          <textarea class="form-control" name="ticketDescription" id="ticketDescription" rows="3"></textarea>
+        </div>
+      </form>
+      <br>
+      <div class="col-12">
+        <button id="createTicketBtn" class="btn btn-primary">Create ticket</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="managerMenu" style="display:none">
+
+    <nav class="navbar navbar-expand-lg navbar-inverse navbar-dark bg-dark">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">ERS Manager Home Page</a>
+        </div>
+        <ul class="navbar-nav navbar-left">
+          <li class="nav-item active">
+            <a class="nav-link" href="#" onclick="showUsers()">View Users</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#" onclick="showManagerTickets()">View Tickets</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#" onclick="showProcessReimb()">Process Tickets</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" onclick="UserLogout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div id="usersTable" style="display:none">
+      <table class="table table-striped" style="width:90%; text-align: center; margin:auto">
+        <thead>
+          <tr>
+            <th scope="col">User ID</th>
+            <th scope="col">Username</th>
+            <th scope="col">Role</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Address</th>
+          </tr>
+        </thead>
+        <tbody id="userBody">
+        </tbody>
+      </table>
+    </div>
+
+    <br><br>
+
+    <div id="managerTicketsTable" style="display:none">
+      <br><br>
+      <table class="table table-striped" style="width:80%; text-align: center; margin:auto">
+        <thead>
+          <tr>
+            <th scope="col" style="width:5%">ID</th>
+            <th scope="col">Status</th>
+            <th scope="col">Author</th>
+            <th scope="col">Resolver</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Type</th>
+            <th scope="col">Description</th>
+            <th scope="col">Creation Date</th>
+            <th scope="col">Resolution Date</th>
+            <th scope="col">Receipt Image</th>
+          </tr>
+        </thead>
+        <tbody id="managerTicktTableBody">
+        </tbody>
+      </table>
+      <br><br>
+    </div>
+
+    <br><br>
+
+    <div id="processReimb" style="display:none; width: 33%; text-align: left; margin:auto">
+      <br>
+      <h4 style="text-align: center; margin:auto">Reimbursement Processing</h4><br><br>
+      <form class="row g-3">
+
+        <div class="input-group mb-3">
+          <label for="reimbID" class="col-sm-5 col-form-label">Enter reimbursement id:</label>
+          <input type="number" class="form-control" placeholder="id" id="reimbID">
+        </div>
+
+        <div class="input-group mb-3">
+          <label class="input-group-text" for="status">Choose action:</label>
+          <select class="form-select" id="status">
+            <option selected>Choose...</option>
+            <option value="1">APPROVE</option>
+            <option value="2">DENY</option>
+          </select>
+        </div>
+      </form>
+      <br>
+      <div class="col-12" style="text-align:center; margin:auto">
+        <button id="ProcessTicketBtn" class="btn btn-primary">Process ticket</button>
+      </div>
+    </div>
+
+  </div>
+
+
+  <script src="index.js"></script>
+</body>
+
+</html>

@@ -1,6 +1,8 @@
 package com.revature.util;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  * <p>This ConnectionFactory class follows the Singleton Design Pattern and facilitates obtaining a connection to a Database for the ERS application.</p>
@@ -14,6 +16,7 @@ public class ConnectionFactory {
         super();
     }
 
+    
     /**
      * <p>This method follows the Singleton Design Pattern to restrict this class to only having 1 instance.</p>
      * <p>It is invoked via:</p>
@@ -31,8 +34,20 @@ public class ConnectionFactory {
     /**
      * <p>The {@link ConnectionFactory#getConnection()} method is responsible for leveraging a specific Database Driver to obtain an instance of the {@link java.sql.Connection} interface.</p>
      * <p>Typically, this is accomplished via the use of the {@link java.sql.DriverManager} class.</p>
+     * @throws SQLException 
      */
-    public Connection getConnection() {
-        return null;
+    public Connection getConnection() throws SQLException {
+    	try {
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		                              
+		String url ="jdbc:postgresql://javafs220404-andres.c0vo93f67nzw.us-east-1.rds.amazonaws.com:5432/ers"; //Madrid
+		//String url ="jdbc:postgresql://javafs-projects.c0vo93f67nzw.us-east-1.rds.amazonaws.com:5432/java_p1_ers";  //Brno
+ 		String username = "postgres"; 
+		String password = "password"; 
+		
+		return DriverManager.getConnection(url,username,password);
     }
 }

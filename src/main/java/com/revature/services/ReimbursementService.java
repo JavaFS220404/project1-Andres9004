@@ -3,9 +3,12 @@ package com.revature.services;
 import com.revature.models.Reimbursement;
 import com.revature.models.Status;
 import com.revature.models.User;
+import com.revature.repositories.ReimbursementDAO;
+import com.revature.repositories.ReimbursementDAOImpl;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The ReimbursementService should handle the submission, processing,
@@ -26,6 +29,28 @@ import java.util.List;
  */
 public class ReimbursementService {
 
+	
+	protected ReimbursementDAO reimbDAO = new ReimbursementDAOImpl();
+	
+	
+	/*public List<Avenger> avengerAssemble(){
+		return avengerDao.findAll();
+	}*/
+	
+	public List<Reimbursement> getAllReimbursements(){
+		return reimbDAO.findAll();
+	}
+	
+	public List<Reimbursement> getAllReimbursements(User user){
+		return reimbDAO.findAll(user);
+	}
+	
+
+	
+	public Optional<Reimbursement> getReimbursementByID(int id) {
+        return reimbDAO.getById(id);
+    }
+	
     /**
      * <ul>
      *     <li>Should ensure that the user is logged in as a Finance Manager</li>
@@ -41,13 +66,30 @@ public class ReimbursementService {
      * After processing, the reimbursement will have its status changed to either APPROVED or DENIED.
      */
     public Reimbursement process(Reimbursement unprocessedReimbursement, Status finalStatus, User resolver) {
-        return null;
+        return reimbDAO.process(unprocessedReimbursement, finalStatus, resolver);
     }
 
+    public void createNewReimbursement(User user) {
+    	reimbDAO.createNewReimbursement(user);
+    }
+    
+    public Reimbursement insertReimb(Reimbursement reimb) {
+    	return reimbDAO.insertReimb(reimb);
+    }
+    
+    public Reimbursement update(Reimbursement unprocessedReimbursement) {
+    	return reimbDAO.update(unprocessedReimbursement);
+    }
+    
     /**
      * Should retrieve all reimbursements with the correct status.
      */
     public List<Reimbursement> getReimbursementsByStatus(Status status) {
-        return Collections.emptyList();
+        return reimbDAO.getByStatus(status);
     }
+    
+    public List<Reimbursement> getReimbursementsByStatus(Status status, User user) {
+        return reimbDAO.getByStatus(status, user);
+    }
+    
 }
